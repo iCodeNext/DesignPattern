@@ -7,4 +7,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Inteface\**" />
+    <EmbeddedResource Remove="Inteface\**" />
+    <None Remove="Inteface\**" />
+  </ItemGroup>
+
 </Project>
