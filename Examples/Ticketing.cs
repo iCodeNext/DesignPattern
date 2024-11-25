@@ -1,13 +1,16 @@
+using Examples.Contracts;
+using Examples.Models;
+
 public class TicketService
 {
-    public ... Get(string ticketType)
+    public BaseTicket Get(string ticketType)
     {
         if (ticketType == "Movie")
-            return new ...();
+            return new MovieTicket();
         else if (ticketType == "Concert")
-            return new ...();
+            return new ConcertTicket();
         else if (ticketType == "Flight")
-            return new ...();
+            return new FlightTicket();
         else
             throw new ArgumentException("Invalid ticket type.");
     }
