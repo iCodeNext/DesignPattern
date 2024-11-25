@@ -1,6 +1,6 @@
 public class NotificationService()
 {
-    public ... Get(string type)
+    public INotificationService Get(string type)
     {
         if (type == "Email")
             return new ...();
