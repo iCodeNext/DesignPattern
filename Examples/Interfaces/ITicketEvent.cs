@@ -2,5 +2,7 @@
 {
     public interface ITicketEvent
     {
+        public Task CreateTicketAsync();
+
     }
 }

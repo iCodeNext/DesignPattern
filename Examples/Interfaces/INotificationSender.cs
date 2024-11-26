@@ -2,5 +2,7 @@
 {
     public interface INotificationSender
     {
+        public Task SendNotificationAsync();
+
     }
 }

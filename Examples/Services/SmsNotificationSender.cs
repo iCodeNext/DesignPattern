@@ -2,7 +2,11 @@
 
 namespace Examples.Services
 {
-    public class SmsNotificationSender:INotificationSender
+    public class SmsNotificationSender : INotificationSender
     {
+        public Task SendNotificationAsync()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
