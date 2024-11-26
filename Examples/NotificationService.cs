@@ -1,15 +1,19 @@
+using Examples.Interfaces;
+using Examples.Services;
+
 public class NotificationService()
 {
-    public ... Get(string type)
+    public INotificationSender Get(string type)
     {
         if (type == "Email")
-            return new ...();
+            return new EmailNotificationSender();
         else if (type == "SMS")
-            return new ...();
+            return new SmsNotificationSender();
         //else if (type == "Push")
         //	return new ...();
 
         else
             throw new ArgumentException("Invalid notification type.");
     }
+
 }
