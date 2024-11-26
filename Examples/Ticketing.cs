@@ -1,3 +1,5 @@
+using Application.Core.Interfaces;
+using Application.Infrastructure.Services.TicketServices;
 public class TicketService
 {
     public ITicketService Get(string ticketType)
