@@ -1,11 +1,13 @@
+using Examples;
+
 public class NotificationService()
 {
-    public ... Get(string type)
+    public IProviderSender Get(string type)
     {
         if (type == "Email")
-            return new ...();
+            return new EmailSender();
         else if (type == "SMS")
-            return new ...();
+            return new SmsSender();
         //else if (type == "Push")
         //	return new ...();
 
