@@ -1,14 +1,16 @@
+using Examples.Interfaces;
+using Examples.Services;
+
 public class TicketService
 {
-    public ... Get(string ticketType)
+    public ITicketService Get(string ticketType)
     {
-        if (ticketType == "Movie")
-            return new ...();
-        else if (ticketType == "Concert")
-            return new ...();
-        else if (ticketType == "Flight")
-            return new ...();
-        else
-            throw new ArgumentException("Invalid ticket type.");
+        return ticketType switch
+        {
+            "Flight" => new Flight(),
+            "Concert" => new Concert(),
+            "Movie" => new Movie(),
+            _ => throw new ArgumentException("Invalid ticket type")
+        };
     }
 }
