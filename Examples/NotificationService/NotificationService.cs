@@ -1,15 +1,14 @@
+namespace Examples.NotificationService;
+
 public class NotificationService()
 {
-    public ... Get(string type)
+    public INotification Get(string type)
     {
-        if (type == "Email")
-            return new ...();
-        else if (type == "SMS")
-            return new ...();
-        //else if (type == "Push")
-        //	return new ...();
-
-        else
-            throw new ArgumentException("Invalid notification type.");
+        return type switch
+        {
+            "Email" => new EmailNotification(),
+            "SMS" => new SmsNotification(),
+            _ => throw new ArgumentException("Invalid notification type.")
+        };
     }
 }
