@@ -1,14 +1,9 @@
+namespace Examples;
 public class TicketService
 {
-    public ... Get(string ticketType)
+    public string Get(ITicketType ticketType)
     {
-        if (ticketType == "Movie")
-            return new ...();
-        else if (ticketType == "Concert")
-            return new ...();
-        else if (ticketType == "Flight")
-            return new ...();
-        else
-            throw new ArgumentException("Invalid ticket type.");
+        if(ticketType is null) throw new ArgumentNullException("ticketType is null.");
+        return ticketType.GenerateTicket();
     }
 }
