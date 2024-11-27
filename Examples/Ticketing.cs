@@ -1,14 +1,16 @@
-public class Ticketing
+namespace Examples
 {
-    private readonly ITicketing _ticketing;
-
-    public Ticketing(ITicketing ticketing)
+    public class Ticketing
     {
-        _ticketing = ticketing;
-    }
-
-    public void ReserveTicket()
-    {
-        _ticketing.Reserve();
+        public ITicketing ReserveTicketing(string type)
+        {
+            return type switch
+            {
+                "Cinema" => new Cinema(),
+                "Flight" => new Flight(),
+                "Concert" => new Concert(),
+                _ => throw new ArgumentException($"The Ticket type {type} is Invalid"),
+            };
+        }
     }
 }

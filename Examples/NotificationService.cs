@@ -1,15 +1,12 @@
 public class NotificationService
 {
-    private readonly INotificationService _notificationService;
-
-
-    public NotificationService(INotificationService notificationService)
+    public INotificationService PushNotification(string type)
     {
-        _notificationService = notificationService;
-    }
-
-    public void PushNotification(string message)
-    {
-        _notificationService.Push(message);
+        return type switch
+        {
+            "Email" => new EmailService(),
+            "Sms" => new SmsService(),
+            _ => throw new ArgumentException($"The Notification type{type} is Invalid"),
+        };
     }
 }
