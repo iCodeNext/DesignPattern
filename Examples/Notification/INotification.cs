@@ -8,6 +8,6 @@ namespace Examples.Notification
 {
     public interface INotification
     {
-        void Send(string message);
+        string Send(string message);
     }
 }

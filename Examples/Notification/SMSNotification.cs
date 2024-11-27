@@ -8,9 +8,9 @@ namespace Examples.Notification
 {
     public class SMSNotification : INotification
     {
-        public void Send(string message)
+        public string Send(string message)
         {
-            return ;
+            return message;
         }
     }
 }
