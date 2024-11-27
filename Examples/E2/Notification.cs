@@ -1,14 +1,19 @@
-﻿public interface INotification
+﻿namespace Examples.E2;
+
+
+public interface INotificationService
 {
     void Send(string message);
 }
 
-public class EmailNotification : INotification
+
+
+public class EmailNotification : INotificationService
 {
     public void Send(string message) => Console.WriteLine($"Email sent: {message}");
 }
 
-public class SmsNotification : INotification
+public class SmsNotification : INotificationService
 {
     public void Send(string message) => Console.WriteLine($"SMS sent: {message}");
 }
@@ -20,19 +25,30 @@ public class SlackNotification
     {
         Console.WriteLine($"Message sent to Slack channel {channel}: {message}");
     }
-} 
+}
 #endregion
+
+public class SlackNotidicationService(string channel) : INotificationService
+{
+    private readonly SlackNotification _slackNotification;
+    public void Send(string message)
+    {
+        _slackNotification.PostMessageToChannel(channel, message);
+    }
+}
+
+
 
 public class NotificationService()
 {
-    public ... Get(string type)
+    public INotificationService Get(string type, string channel = null)
     {
         if (type == "Email")
-            return new ...();
+            return new EmailNotification();
         else if (type == "SMS")
-            return new ...();
+            return new SmsNotification();
         else if (type == "Slack")
-            return new ...();
+            return new SlackNotidicationService(channel);
 
         else
             throw new ArgumentException("Invalid notification type.");

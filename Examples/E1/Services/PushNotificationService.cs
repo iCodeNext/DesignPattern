@@ -1,6 +1,6 @@
-﻿using Examples.Contracts;
+﻿using Examples.E1.Contracts;
 
-namespace Examples.Services;
+namespace Examples.E1.Services;
 
 public class PushNotificationService : INotificationService
 {

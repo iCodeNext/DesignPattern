@@ -1,4 +1,4 @@
-﻿namespace Examples.Contracts;
+﻿namespace Examples.E1.Contracts;
 
 public interface INotificationService
 {

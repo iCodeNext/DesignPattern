@@ -1,5 +1,4 @@
-using Examples.Contracts;
-using Examples.Models;
+using Examples.E1.Models;
 
 public class TicketService
 {

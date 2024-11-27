@@ -1,7 +1,9 @@
-using Examples.Contracts;
-using Examples.Services;
+using Examples.E1.Contracts;
+using Examples.E1.Services;
 
-public class NotificationService()
+namespace Examples.E1;
+
+public class NotificationService
 {
     public INotificationService Get(string type)
     {
