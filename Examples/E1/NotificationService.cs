@@ -1,4 +1,4 @@
-public class NotificationService()
+public partial class NotificationService()
 {
     public ... Get(string type)
     {
