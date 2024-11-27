@@ -20,19 +20,28 @@ public class SlackNotification
     {
         Console.WriteLine($"Message sent to Slack channel {channel}: {message}");
     }
-} 
+}
+
+public class SlackNotificationAdapter(SlackNotification slackNotification) : INotification
+{
+
+    public void Send(string message)
+    {
+        slackNotification.PostMessageToChannel("Mstaheri", "hi");
+    }
+}
 #endregion
 
 public class NotificationService()
 {
-    public ... Get(string type)
+    public INotification Get(string type)
     {
         if (type == "Email")
-            return new ...();
+            return new EmailNotification();
         else if (type == "SMS")
-            return new ...();
+            return new SmsNotification();
         else if (type == "Slack")
-            return new ...();
+            return new SlackNotificationAdapter(new SlackNotification());
 
         else
             throw new ArgumentException("Invalid notification type.");
