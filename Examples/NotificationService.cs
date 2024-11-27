@@ -1,11 +1,13 @@
+using Examples.Notification;
+
 public class NotificationService()
 {
-    public ... Get(string type)
+    public INotification Get(string type)
     {
         if (type == "Email")
-            return new ...();
+            return new EmailNotification();
         else if (type == "SMS")
-            return new ...();
+            return new SMSNotification();
         //else if (type == "Push")
         //	return new ...();
 
