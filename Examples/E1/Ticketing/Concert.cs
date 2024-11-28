@@ -1,4 +1,4 @@
-﻿namespace Examples
+﻿namespace Examples.E1.Ticketing
 {
     public class Concert : ITicketing
     {
