@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Examples.E3
+﻿namespace Examples.E3
 {
     public interface ICargo
     {
         public void Book();
     }
-    public struct ShipCargoLocations
+    public struct CargoDeliveryLocations
     {
         public string Origin;
         public string Destination;
@@ -41,10 +35,10 @@ namespace Examples.E3
     #region ShipCargo
     public class ShipCargo : ICargo
     {
-        private readonly ShipCargoLocations _locations;
+        private readonly CargoDeliveryLocations _locations;
 
         // Using Struct For Constructor 
-        public ShipCargo(ShipCargoLocations locations)
+        public ShipCargo(CargoDeliveryLocations locations)
         {
             _locations = locations;
         }
@@ -80,18 +74,28 @@ namespace Examples.E3
     #endregion
     public class CargoFactory
     {
-        public ICargo GetTypeOfCargoDelivery(string cargoDeliveryType, ShipCargoLocations? locations = null)
+        private List<ICargo> CargoDeliveryTypes = new();
+
+        //Consider Configuration Method To Add DeliveryTypes To CargoDeliveryTypes
+        public void ConfigureDeliveryTypes(Action<List<ICargo>> deliveryTypes)
         {
-            return cargoDeliveryType switch
+            deliveryTypes(CargoDeliveryTypes);
+        }
+
+        public ICargo GetTypeOfCargoDelivery(string cargoDeliveryType)
+        {
+
+            foreach (ICargo DeliveryType in CargoDeliveryTypes)
             {
-                "Air" => AirCargo.Instance,
+                Type type = DeliveryType.GetType();
 
-                "Ship" => locations is null
-                    ? throw new ArgumentNullException(nameof(locations), "You Must Pass Locations")
-                    : new ShipCargo((ShipCargoLocations)locations),
+                if (type.Name == cargoDeliveryType)
+                    return DeliveryType;
+            }
 
-                "Train" => new TrainCargo()
-            };
+            throw new Exception(
+                $"Could not find {cargoDeliveryType}, How to solve: Make sure that you added delivery type in Configuration Method");
+
         }
     }
 
