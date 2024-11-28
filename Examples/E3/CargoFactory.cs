@@ -66,7 +66,7 @@ namespace Examples.E3
     // Considering Init Method Because it is a Part of Task
     public class TrainCargo : ICargo
     {
-        public bool IsInitialized = false;
+        private bool IsInitialized = false;
 
         public void Init() => IsInitialized = true;
         public void Book()
