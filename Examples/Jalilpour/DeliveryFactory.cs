@@ -53,9 +53,9 @@ namespace Examples.Jalilpour
     {
         public ShipDelivery()
         {
-                
+
         }
-        public ShipDelivery(string origin,string destination)
+        public ShipDelivery(string origin, string destination)
         {
 
         }
@@ -86,15 +86,29 @@ namespace Examples.Jalilpour
     {
         public override Delivery CreateDelivery()
         {
-            return new ShipDelivery("BandarAbbas","Astarakhan");
+            return new ShipDelivery("BandarAbbas", "Astarakhan");
         }
     }
 
     public class TrainDeliveryFactory : DeliveryFactory
     {
+        private static bool hasAlreadyInstance;
         public override Delivery CreateDelivery()
         {
-            return new TrainDelivery();
+            if (hasAlreadyInstance)
+            {
+                init();
+                return new TrainDelivery();
+            }
+            else
+            {
+                hasAlreadyInstance = true;
+                return new TrainDelivery();
+            }
+        }
+        private void init()
+        {
+            throw NotImplementedException();
         }
     }
 
