@@ -51,6 +51,14 @@ namespace Examples.Jalilpour
 
     public class ShipDelivery : Delivery
     {
+        public ShipDelivery()
+        {
+                
+        }
+        public ShipDelivery(string origin,string destination)
+        {
+
+        }
         public override void DeliverCargo()
         {
             throw new NotImplementedException();
@@ -78,7 +86,7 @@ namespace Examples.Jalilpour
     {
         public override Delivery CreateDelivery()
         {
-            return new ShipDelivery();
+            return new ShipDelivery("BandarAbbas","Astarakhan");
         }
     }
 
