@@ -20,7 +20,10 @@ namespace Examples.FactoryPattern.CargoTransport.Impliment
         AirTransport airInstance;   
         public override Transport CreateTransport()
         {
-            airInstance = new AirTransport();
+            if (airInstance == null)
+            {
+                airInstance = new AirTransport();
+            }
             return airInstance;
         }
     }

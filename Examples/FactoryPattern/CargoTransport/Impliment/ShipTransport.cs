@@ -24,16 +24,16 @@ namespace Examples.FactoryPattern.CargoTransport.Impliment
     }
     public class ShipTransportFactory : TransportFactory
     {
-        ShipTransport airInstance;
+        ShipTransport ShipInstance;
         public override ShipTransport CreateTransport()
         {
-            airInstance = new ShipTransport(string.Empty, string.Empty);
-            return airInstance;
+            ShipInstance = new ShipTransport(string.Empty, string.Empty);
+            return ShipInstance;
         }
         public ShipTransport CreateTransport(string origin , string destination)
         {
-            airInstance = new ShipTransport(origin, destination);
-            return airInstance;
+            ShipInstance = new ShipTransport(origin, destination);
+            return ShipInstance;
         }
     }
 }

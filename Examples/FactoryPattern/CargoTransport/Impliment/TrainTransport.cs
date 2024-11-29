@@ -18,7 +18,7 @@ namespace Examples.FactoryPattern.CargoTransport.Impliment
     public class TrainTransportFactory : TransportFactory
     {
         private bool _isInitialized = false;
-        TrainTransport airInstance;
+        TrainTransport TrainInstance;
         public TrainTransportFactory()
         {
             Initialize();
@@ -35,8 +35,8 @@ namespace Examples.FactoryPattern.CargoTransport.Impliment
             {
                 throw new InvalidOperationException("Train Transport is not initialized.");
             }
-            airInstance = new TrainTransport();
-            return airInstance;
+            TrainInstance = new TrainTransport();
+            return TrainInstance;
         }
     }
 }
