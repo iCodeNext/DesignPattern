@@ -23,30 +23,30 @@ namespace Examples.Jalilpour
         }
     }
 
-    public abstract class Delivery
+    public interface IDelivery
     {
-        abstract void DeliverCargo();
+        void DeliverCargo();
     }
 
-    public class Air : Delivery
+    public class Air : IDelivery
     {
-        private override void DeliverCargo()
+        private void DeliverCargo()
         {
             throw new NotImplementedException();
         }
     }
 
-    public class Train : Delivery
+    public class Train : IDelivery
     {
-        private override void DeliverCargo()
+        private void DeliverCargo()
         {
             throw new NotImplementedException();
         }
     }
 
-    public class Ship : Delivery
+    public class Ship : IDelivery
     {
-        private override void DeliverCargo()
+        private void DeliverCargo()
         {
             throw new NotImplementedException();
         }
