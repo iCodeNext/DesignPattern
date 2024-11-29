@@ -8,7 +8,7 @@ namespace Examples.Jalilpour
         Train
     }
 
-    public class DeliveryFactory
+    public class DeliveryService
     {
         public Delivery Create(CargoType cargoType)
         {
@@ -23,30 +23,30 @@ namespace Examples.Jalilpour
         }
     }
 
-    public interface IDelivery
+    public abstract class Delivery
     {
-        void DeliverCargo();
+        public abstract void DeliverCargo();
     }
 
-    public class Air : IDelivery
+    public class AirDelivery : Delivery
     {
-        private void DeliverCargo()
+        public override void DeliverCargo()
         {
             throw new NotImplementedException();
         }
     }
 
-    public class Train : IDelivery
+    public class TrainDelivery : Delivery
     {
-        private void DeliverCargo()
+        public override void DeliverCargo()
         {
             throw new NotImplementedException();
         }
     }
 
-    public class Ship : IDelivery
+    public class ShipDelivery : Delivery
     {
-        private void DeliverCargo()
+        public override void DeliverCargo()
         {
             throw new NotImplementedException();
         }
@@ -58,6 +58,35 @@ namespace Examples.Jalilpour
         {
             DeliveryFactory deliverFactory = new();
             var instance = deliverFactory.Create(CargoType.Air);
+        }
+    }
+
+    public abstract class DeliveryFactory
+    {
+        public abstract Delivery CreateDelivery();
+    }
+
+    public class AirDeliveryFactory : DeliveryFactory
+    {
+        public override Delivery CreateDelivery()
+        {
+
+        }
+    }
+
+    public class ShipDeliveryFactory : DeliveryFactory
+    {
+        public override Delivery CreateDelivery()
+        {
+
+        }
+    }
+
+    public class TrainDeliveryFactory : DeliveryFactory
+    {
+        public override Delivery CreateDelivery()
+        {
+
         }
     }
 }
