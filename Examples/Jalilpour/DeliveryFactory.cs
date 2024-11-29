@@ -13,13 +13,18 @@ namespace Examples.Jalilpour
         public Delivery Create(CargoType cargoType)
         {
             if (cargoType == CargoType.Air)
-                return new Air();
-            else if (cargoType == CargoType.Train)
-                return new Train();
+            {
+                return new AirDeliveryFactory().CreateDelivery();
+            }
             else if (cargoType == CargoType.Ship)
-                return new Ship();
-            else
-                throw new ArgumentException("Invalid Cargo Type");
+            {
+                return new ShipDeliveryFactory().CreateDelivery();
+            }
+            else if (cargoType == CargoType.Train)
+            {
+                return new TrainDeliveryFactory().CreateDelivery();
+            }
+            throw new InvalidArgumentException();
         }
     }
 
@@ -52,14 +57,6 @@ namespace Examples.Jalilpour
         }
     }
 
-    public class Program()
-    {
-        public void main()
-        {
-            DeliveryFactory deliverFactory = new();
-            var instance = deliverFactory.Create(CargoType.Air);
-        }
-    }
 
     public abstract class DeliveryFactory
     {
@@ -70,7 +67,7 @@ namespace Examples.Jalilpour
     {
         public override Delivery CreateDelivery()
         {
-
+            return new AirDelivery();
         }
     }
 
@@ -78,7 +75,7 @@ namespace Examples.Jalilpour
     {
         public override Delivery CreateDelivery()
         {
-
+            return new ShipDelivery();
         }
     }
 
@@ -86,7 +83,17 @@ namespace Examples.Jalilpour
     {
         public override Delivery CreateDelivery()
         {
+            return new TrainDelivery();
+        }
+    }
 
+    public class Program()
+    {
+        public void main()
+        {
+            DeliveryService deliverFactory = new();
+            var instance = deliverFactory.Create(CargoType.Air);
+            instance.DeliverCargo();
         }
     }
 }
