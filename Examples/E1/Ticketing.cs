@@ -1,14 +1,43 @@
 public class TicketService
 {
-    public ... Get(string ticketType)
+    public ITicketProvider Get(string ticketType)
     {
         if (ticketType == "Movie")
-            return new ...();
+            return new MovieTicketProvider();
         else if (ticketType == "Concert")
-            return new ...();
+            return new ConcertTicketProvider();
         else if (ticketType == "Flight")
-            return new ...();
+            return new FlightTicketProvider();
         else
             throw new ArgumentException("Invalid ticket type.");
+    }
+}
+
+public interface ITicketProvider
+{
+    public void Issue();
+}
+
+public class MovieTicketProvider : ITicketProvider
+{
+    public void Issue()
+    {
+        throw new NotImplementedException();
+    }
+}
+
+public class ConcertTicketProvider : ITicketProvider
+{
+    public void Issue()
+    {
+        throw new NotImplementedException();
+    }
+}
+
+public class FlightTicketProvider : ITicketProvider
+{
+    public void Issue()
+    {
+        throw new NotImplementedException();
     }
 }
