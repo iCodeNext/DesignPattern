@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Examples", "Examples.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserCode", "..\UserCode\UserCode.csproj", "{03E39C4B-5B4C-4FD2-A79D-AC86704AF3DC}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CargoTransportService", "CargoTransportService", "{AEC9CF33-C9B3-4E9B-977B-F37184CCC627}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CargoTransportService", "..\CargoTransportService\CargoTransportService.csproj", "{7214A670-A3B6-4FEA-950C-2B493651A8B4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,9 +25,16 @@ Global
 		{03E39C4B-5B4C-4FD2-A79D-AC86704AF3DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03E39C4B-5B4C-4FD2-A79D-AC86704AF3DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03E39C4B-5B4C-4FD2-A79D-AC86704AF3DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7214A670-A3B6-4FEA-950C-2B493651A8B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7214A670-A3B6-4FEA-950C-2B493651A8B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7214A670-A3B6-4FEA-950C-2B493651A8B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7214A670-A3B6-4FEA-950C-2B493651A8B4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7214A670-A3B6-4FEA-950C-2B493651A8B4} = {AEC9CF33-C9B3-4E9B-977B-F37184CCC627}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {22B9C537-2B7B-4D6D-B152-E2C4BA31F193}
