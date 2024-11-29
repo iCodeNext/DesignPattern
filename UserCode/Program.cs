@@ -1,25 +1,16 @@
 ﻿using System.Data.Common;
 using Examples.E3;
-CargoFactory cargoF = new CargoFactory();
-
-CargoDeliveryLocations ShipTravelLocation = new CargoDeliveryLocations
-    { 
-        Origin = "Bandar-Abbas",
-        Destination = "Qatar"
-    };
 
 
 
-cargoF.ConfigureDeliveryTypes(deliveryTypes =>
+CargoFactory cargoF = new CargoFactory(deliveryTypes =>
 {
-    deliveryTypes.Add(new TrainCargo());
-    deliveryTypes.Add(new ShipCargo(ShipTravelLocation));
-    deliveryTypes.Add(AirCargo.Instance);
-    deliveryTypes.Add(new TruckCargo()); // ForExample Developer want to Consider new behavior called TruckCargo
+    deliveryTypes.Add("Truck",typeof(TruckCargo));
 });
 
 
-var deliveryCargo = cargoF.GetTypeOfCargoDelivery("TruckCargo");
+
+var deliveryCargo = cargoF.GetTypeOfCargoDelivery("air");
 deliveryCargo.Book();
 
 

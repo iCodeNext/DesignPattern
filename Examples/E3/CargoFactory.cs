@@ -74,27 +74,30 @@
     #endregion
     public class CargoFactory
     {
-        private List<ICargo> CargoDeliveryTypes = new();
+        private readonly Dictionary<string, Type> _deliveryTypes;
 
-        //Consider Configuration Method To Add DeliveryTypes To CargoDeliveryTypes
-        public void ConfigureDeliveryTypes(Action<List<ICargo>> deliveryTypes)
+        //Problem:
+        //it is linear. O(n).
+        //it is not a good idea to iterate over a list and hold the all references..
+        // ********Dictionaries don't need iteration********
+        public CargoFactory(Action<Dictionary<string, Type>> deliveryTypes)
         {
-            deliveryTypes(CargoDeliveryTypes);
+            _deliveryTypes = new();
+            deliveryTypes(_deliveryTypes);
         }
 
         public ICargo GetTypeOfCargoDelivery(string cargoDeliveryType)
         {
-
-            foreach (ICargo DeliveryType in CargoDeliveryTypes)
+            
+            if (_deliveryTypes.TryGetValue(cargoDeliveryType, out Type type))
             {
-                Type type = DeliveryType.GetType();
-
-                if (type.Name == cargoDeliveryType)
-                    return DeliveryType;
+                // We Create Instance only when developer need it
+                return (ICargo)Activator.CreateInstance(type)!;
             }
 
+
             throw new Exception(
-                $"Could not find {cargoDeliveryType}, How to solve: Make sure that you added delivery type in Configuration Method");
+                $"Could not find {cargoDeliveryType}, How to solve: Make sure that you added delivery type in constructor");
 
         }
     }
