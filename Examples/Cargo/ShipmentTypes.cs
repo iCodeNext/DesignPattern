@@ -4,5 +4,6 @@ public enum ShipmentTypes
 {
     Air,
     Train,
-    Ship
+    Ship,
+    Truck
 }
