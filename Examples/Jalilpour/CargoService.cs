@@ -6,32 +6,37 @@ using System.Threading.Tasks;
 
 namespace Examples.Jalilpour
 {
-    public class CargoService
+    public class DeliverFactory
     {
-        public object DeliverCargo(string cargoType)
+        public Deliver Create(string cargoType)
         {
             if (cargoType == "Air")
-                return new AirService();
+                return new Air();
             else if (cargoType == "Ship")
-                return new TrainService();
+                return new Train();
             else if (cargoType == "Trin")
-                return new ShipService();
+                return new Ship();
             else
                 throw new ArgumentException("Invalid Cargo Type");
         }
     }
 
-    public class AirService
+    public class Deliver
     {
 
     }
 
-    public class TrainService
+    public class Air : Deliver
     {
 
     }
 
-    public class ShipService
+    public class Train : Deliver
+    {
+
+    }
+
+    public class Ship : Deliver
     {
 
     }
