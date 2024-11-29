@@ -60,12 +60,12 @@
     // Considering Init Method Because it is a Part of Task
     public class TrainCargo : ICargo
     {
-        private bool IsInitialized = false;
+        private bool _isInitialized = false;
 
-        public void Init() => IsInitialized = true;
+        public void Init() => _isInitialized = true;
         public void Book()
         {
-            if (!IsInitialized)
+            if (!_isInitialized)
                 throw new InvalidOperationException("First Invoke Initialize Method, Then Invoke Book Method");
             Console.WriteLine("Booking Via TrainCargo....");
         }
