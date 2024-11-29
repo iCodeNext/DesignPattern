@@ -6,15 +6,22 @@ using System.Threading.Tasks;
 
 namespace Examples.Jalilpour
 {
+    enum CargoType
+    {
+        Air,
+        Ship,
+        Train
+    }
+
     public class DeliverFactory
     {
-        public Deliver Create(string cargoType)
+        public Deliver Create(CargoType cargoType)
         {
-            if (cargoType == "Air")
+            if (cargoType == CargoType.Air)
                 return new Air();
-            else if (cargoType == "Ship")
+            else if (cargoType == CargoType.Train)
                 return new Train();
-            else if (cargoType == "Trin")
+            else if (cargoType == CargoType.Ship)
                 return new Ship();
             else
                 throw new ArgumentException("Invalid Cargo Type");
@@ -39,5 +46,14 @@ namespace Examples.Jalilpour
     public class Ship : Deliver
     {
 
+    }
+
+    public class Program()
+    {
+        public void main()
+        {
+            DeliverFactory deliverFactory = new();
+            var instance = deliverFactory.Create(CargoType.Air);
+        }
     }
 }
