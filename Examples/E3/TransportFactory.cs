@@ -6,27 +6,27 @@ public abstract class TransportFactory
 }
 public class AIRTransportFactory : TransportFactory
 {
-    private static Air? instance;
+    private static Air? _instance;
     public override ITransport CreateTransport()
     {
-        if (instance == null)
+        if (_instance == null)
         {
-            instance = new();
+            _instance = new();
         }
-        return instance;
+        return _instance;
     }
 }
 public class ShipTransportFactory : TransportFactory
 {
-    private List<Ship> shipInstances = [];
+    private List<Ship> _shipInstances = [];
     public override ITransport CreateTransport()
     {
         
-        if(shipInstances.Count > 2)
-            shipInstances.Clear();
+        if(_shipInstances.Count > 2)
+            _shipInstances.Clear();
 
         Ship transport = new();
-        shipInstances.Add(transport);
+        _shipInstances.Add(transport);
         
         return transport;
     }
