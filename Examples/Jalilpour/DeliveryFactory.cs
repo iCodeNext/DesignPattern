@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Examples.Jalilpour
 {
     enum CargoType
@@ -13,9 +8,9 @@ namespace Examples.Jalilpour
         Train
     }
 
-    public class DeliverFactory
+    public class DeliveryFactory
     {
-        public Deliver Create(CargoType cargoType)
+        public Delivery Create(CargoType cargoType)
         {
             if (cargoType == CargoType.Air)
                 return new Air();
@@ -28,31 +23,40 @@ namespace Examples.Jalilpour
         }
     }
 
-    public class Deliver
+    public abstract class Delivery
     {
-
+        abstract void DeliverCargo();
     }
 
-    public class Air : Deliver
+    public class Air : Delivery
     {
-
+        private override void DeliverCargo()
+        {
+            throw new NotImplementedException();
+        }
     }
 
-    public class Train : Deliver
+    public class Train : Delivery
     {
-
+        private override void DeliverCargo()
+        {
+            throw new NotImplementedException();
+        }
     }
 
-    public class Ship : Deliver
+    public class Ship : Delivery
     {
-
+        private override void DeliverCargo()
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class Program()
     {
         public void main()
         {
-            DeliverFactory deliverFactory = new();
+            DeliveryFactory deliverFactory = new();
             var instance = deliverFactory.Create(CargoType.Air);
         }
     }
