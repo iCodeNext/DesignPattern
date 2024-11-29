@@ -1,43 +1,41 @@
-﻿namespace Examples.E3
+﻿namespace Examples.E3;
+
+public abstract class TransportFactory
 {
-    public abstract class TransportFactory
+    public abstract ITransport CreateTransport();
+}
+public class AIRTransportFactory : TransportFactory
+{
+    Air transport;
+    public override ITransport CreateTransport()
     {
-        public abstract Transport CreateTransport(string transportType);
+        transport = new();
+
+        return transport;
     }
-    public class AIRTransportFactory : TransportFactory
+}
+public class ShipTransportFactory : TransportFactory
+{
+    List<Ship> shipInstaces = [];
+    public override ITransport CreateTransport()
     {
-        AIR transport;
-        public override Transport CreateTransport(string transportType)
-        {
-            transport = new AIR();
+        Ship transport = new();
 
-            return transport;
-        }
+        if(shipInstaces.Count > 2)
+            shipInstaces.Clear();
+
+        shipInstaces.Add(transport);
+        
+        return transport;
     }
-    public class ShipTransportFactory : TransportFactory
+}
+public class TrainTransportFactory : TransportFactory
+{
+    public override ITransport CreateTransport()
     {
-        List<Ship> shipInstaces = new List<Ship>();
-        public override Transport CreateTransport(string transportType)
-        {
-            Ship transport = new Ship();
+        Train transport = new();
+        transport.Init();
 
-            if(shipInstaces.Count > 2)
-                shipInstaces = new List<Ship>();
-
-            shipInstaces.Add(transport);
-            
-            return transport;
-        }
-    }
-    public class TrainTransportFactory : TransportFactory
-    {
-        public override Transport CreateTransport(string transportType)
-        {
-            Train transport = new Train();
-
-            transport.Init();
-
-            return transport;
-        }
+        return transport;
     }
 }

@@ -1,34 +1,33 @@
-﻿namespace Examples.E3
+﻿namespace Examples.E3;
+
+public interface ITransport
 {
-    public abstract class Transport
+    public void Delivery();
+}
+public class Air : ITransport
+{
+    public void Delivery()
     {
-        public abstract void Delivery();
+        throw new NotImplementedException();
     }
-    public class AIR : Transport
+}
+public class Ship : ITransport
+{
+    public void Delivery()
     {
-        public override void Delivery()
-        {
-            throw new NotImplementedException();
-        }
+        throw new NotImplementedException();
     }
-    public class Ship : Transport
+}
+
+public class Train : ITransport
+{
+    public void Delivery()
     {
-        public override void Delivery()
-        {
-            throw new NotImplementedException();
-        }
+        throw new NotImplementedException();
     }
 
-    public class Train : Transport
+    public void Init()
     {
-        public void Init()
-        {
-            throw new NotImplementedException();
-        }
-        public override void Delivery()
-        {
-            throw new NotImplementedException();
-        }
+        Console.WriteLine("call Init (TrainFactory)");
     }
-
 }
