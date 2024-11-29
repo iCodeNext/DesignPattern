@@ -65,9 +65,12 @@ namespace Examples.Jalilpour
 
     public class AirDeliveryFactory : DeliveryFactory
     {
+        private static AirDelivery airDelivery;
         public override Delivery CreateDelivery()
         {
-            return new AirDelivery();
+            if (airDelivery == null)
+                airDelivery = new AirDelivery();
+            return airDelivery;
         }
     }
 
@@ -86,6 +89,7 @@ namespace Examples.Jalilpour
             return new TrainDelivery();
         }
     }
+
 
     public class Program()
     {
