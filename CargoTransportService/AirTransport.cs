@@ -10,7 +10,11 @@ public class AirTransport : CargoTransport
 
 	public static AirTransport GetInstance()
 	{
-		return _instance;
+		if (_instance == null) 
+		{
+			_instance = new AirTransport(); 
+		}
+		return _instance; 
 	}
 
 	public override void Book()

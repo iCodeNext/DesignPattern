@@ -7,13 +7,13 @@ public class TrainTransport : CargoTransport
 		Initialize();
 	}
 
-	private static void Initialize()
-	{
-		Console.WriteLine("Train transport initialized.");
-	}
-
 	public override void Book()
 	{
 		Console.WriteLine("Package booked via Train Transport.");
+	}
+
+	private void Initialize()
+	{
+		Console.WriteLine("Train transport initialized.");
 	}
 }
