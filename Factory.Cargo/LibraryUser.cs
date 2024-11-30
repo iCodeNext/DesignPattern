@@ -28,7 +28,7 @@ public class TruckTransportation : ITransportation
 public class TruckTransportationFactory : ITransportationFactory
 {
     public ITransportation Create()
-        => new AirTransportation();
+        => new TruckTransportation();
 
     public ITransportation Create(string origin, string destination)
     {
