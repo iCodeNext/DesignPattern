@@ -6,33 +6,14 @@ using System.Threading.Tasks;
 
 namespace Examples.E3
 {
-
-    public class Cargo
-    {
-        public IShipping Send(string shippingType)
-        {
-            if (shippingType == "Air")
-                return new AirFactory().CreateShipping();
-            else if (shippingType == "Ship")
-                return new ShipFactory("", "").CreateShipping();
-            else if (shippingType == "Train")
-                return new TrainFactory().CreateShipping();
-
-            else
-                throw new ArgumentException("Invalid Shipping type.");
-        }
-    }
-
     public interface IShipping
     {
-        void Send();
+      
     }
 
     public class Air : IShipping
     {
-        public void Send()
-        {
-        }
+     
     }
 
 
@@ -46,25 +27,18 @@ namespace Examples.E3
             _origin = origin;
             _destination = destination;
         }
-
-        public void Send()
-        {
-        }
     }
 
 
     public class Train : IShipping
     {
-        public void Send()
-        {
-        }
+    
     }
     public class Truck : IShipping
     {
-        public void Send()
-        {
-        }
+     
     }
+
     public interface IShippingFactory
     {
         IShipping CreateShipping();
@@ -118,11 +92,39 @@ namespace Examples.E3
     }
     public class TruckFactory : IShippingFactory
     {
-
         public IShipping CreateShipping()
         {
             return new Truck();
         }
     }
+
+    public class Cargo
+    {
+        private IShippingFactory _shippingFactory;
+        public Cargo(IShippingFactory shippingFactory)
+        {
+            _shippingFactory = shippingFactory;
+        }
+
+        public IShipping ShipProduct()
+        {
+            return _shippingFactory.CreateShipping();
+        }
+
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var airCargo = new Cargo(new AirFactory()).ShipProduct();
+
+            var shipCargo = new Cargo(new ShipFactory("A", "B")).ShipProduct();
+
+            var trainCargo = new Cargo(new TrainFactory()).ShipProduct();
+        }
+    }
+
+
 }
 
