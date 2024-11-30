@@ -9,14 +9,14 @@ namespace Examples.E3
 
     public class Cargo
     {
-        public IShippingFactory Send(string shippingType)
+        public IShipping Send(string shippingType)
         {
             if (shippingType == "Air")
-                return new AirFactory();
+                return new AirFactory().CreateShipping();
             else if (shippingType == "Ship")
-                return new ShipFactory("", "");
+                return new ShipFactory("", "").CreateShipping();
             else if (shippingType == "Train")
-                return new TrainFactory();
+                return new TrainFactory().CreateShipping();
 
             else
                 throw new ArgumentException("Invalid Shipping type.");
@@ -54,6 +54,12 @@ namespace Examples.E3
 
 
     public class Train : IShipping
+    {
+        public void Send()
+        {
+        }
+    }
+    public class Truck : IShipping
     {
         public void Send()
         {
@@ -108,6 +114,14 @@ namespace Examples.E3
         }
         private void Call()
         {
+        }
+    }
+    public class TruckFactory : IShippingFactory
+    {
+
+        public IShipping CreateShipping()
+        {
+            return new Truck();
         }
     }
 }
