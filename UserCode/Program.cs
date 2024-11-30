@@ -1,6 +1,7 @@
 ﻿
 
 using Examples.FactoryPattern.CargoTransport;
+using Examples.FactoryPattern.CargoTransport.Base;
 
 public class Program
 {
@@ -19,6 +20,10 @@ public class Program
 
         var instanceTrain = factory.Create("Train", "", "");
         instanceTrain.Delivery();
+
+        //truck
+        var instanceTruck = new TruckTransport();
+        instanceTruck.Delivery();
 
         Console.ReadKey();
     }

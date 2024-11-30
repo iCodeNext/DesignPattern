@@ -40,7 +40,7 @@ namespace Examples.E2
         }
         public void Send(string message)
         {
-            _slackNotification.PostMessageToChannel("chanelA", "Hi Dear Mohammad , Thank you ");
+            _slackNotification.PostMessageToChannel("chanelA", message);
         }
     }
 
