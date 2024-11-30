@@ -1,15 +1,66 @@
+using System.Runtime.CompilerServices;
+using static NotificationService;
+
 public class NotificationService()
 {
-    public ... Get(string type)
+    private readonly NotificationFactory notificationFactory;
+    public Notification Create(string type)
     {
         if (type == "Email")
-            return new ...();
+            return new EmailFactory().CreateNotification();
         else if (type == "SMS")
-            return new ...();
-        //else if (type == "Push")
-        //	return new ...();
+            return new SmsFactory().CreateNotification();
 
-        else
-            throw new ArgumentException("Invalid notification type.");
+        throw new Exception();
+        //return notificationFactory.CreateNotification();
+    }
+    public abstract class Notification
+    {
+        public abstract void Send(string message);
+    }
+
+    public class Email : Notification
+    {
+        public override void Send(string message)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class Sms : Notification
+    {
+        public override void Send(string message)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public abstract class NotificationFactory
+    {
+        public abstract Notification CreateNotification();
+    }
+    public class EmailFactory : NotificationFactory
+    {
+        List<Email> emails = new List<Email>();
+        public override Notification CreateNotification()
+        {
+            return null;
+        }
+    }
+    public class SmsFactory : NotificationFactory
+    {
+        public override Notification CreateNotification()
+        {
+            var notif = new Sms();
+            return notif;   
+        }
+    }
+
+
+}
+public class Program
+{
+    public void Main(string[] args)
+    {
+        
     }
 }
