@@ -1,6 +1,6 @@
 ﻿namespace Examples.Cargo;
 
-public class Ship : IBook
+public class Ship : IShipping
 {
     private string _Origin;
     private string _Destination;
@@ -9,5 +9,10 @@ public class Ship : IBook
         _Origin = Origin;
         _Destination = Destination;
     }
-    public void Book() => Console.WriteLine($"Booked from origin: {_Origin} to destination: {_Destination}");
+    public void Create() => Console.WriteLine($"Booked from origin: {_Origin} to destination: {_Destination}");
+
+    public void PrintDetail()
+    {
+        Console.WriteLine($"Cargo by Ship from {_Origin} to {_Destination}");
+    }
 }

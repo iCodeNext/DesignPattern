@@ -1,6 +1,6 @@
 ﻿namespace Examples.Cargo;
 
-public class Train : IBook
+public class Train : IShipping
 {
     private bool _isInitialized = false;
     public void initialized()
@@ -9,12 +9,12 @@ public class Train : IBook
         Console.WriteLine("Train initialized");
     }
 
-    public void Book()
+    public void PrintDetail()
     {
         if (!_isInitialized)
         {
-            throw new Exception("Book not ready");
+            throw new ArgumentException("Train is not initialized");
         }
-        Console.WriteLine("Train Booked");
+        Console.WriteLine("Cargo by Train");
     }
 }
