@@ -2,16 +2,14 @@
 {
     public class ShipTransferFactory : ITransferFactory
     {
-        private readonly string _origin;
-        private readonly string _destination;
-        public ShipTransferFactory(string origin, string destination)
+        public ITransfer Send(string origin, string destination)
         {
-            _origin = origin;
-            _destination = destination;
+            return new ShipTransfer(origin, destination);
         }
+
         public ITransfer Send()
         {
-            return new ShipTransfer(_origin, _destination);
+            throw new NotImplementedException();
         }
     }
 }

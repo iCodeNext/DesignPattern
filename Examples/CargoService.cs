@@ -4,20 +4,21 @@ namespace Examples
 {
     public class CargoService
     {
-        public ITransfer Get(string type, string? origin, string? destination)
+        public ITransfer Transfer(string type, string? origin, string? destination)
         {
             switch (type)
             {
                 case "AIR":
-                    return new AIRTransferFactory();
-                    break;
+                    return new AIRTransferFactory().Send();
                 case "Ship":
-                    return new ShipTransferFactory(origin, destination);
-                    break;
+                    return new ShipTransferFactory().Send(origin, destination);
                 case "Train":
-                    return new TrainTransferFactory();
-                    break;
+                    return new TrainTransferFactory().Send();
+                default
+                    :
+                    throw new NotImplementedException();
             }
+
         }
     }
 }

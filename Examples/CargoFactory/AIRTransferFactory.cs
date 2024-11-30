@@ -2,10 +2,14 @@
 {
     public class AIRTransferFactory : ITransferFactory
     {
-        private readonly AIRTransfer _instance;
         public ITransfer Send()
         {
-            return _instance ?? new AIRTransfer();
+            return new AIRTransfer();
+        }
+
+        public ITransfer Send(string origin, string destination)
+        {
+            throw new NotImplementedException();
         }
     }
 }
