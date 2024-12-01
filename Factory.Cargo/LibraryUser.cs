@@ -5,14 +5,14 @@ namespace Factory.Cargo;
 
 public class LibraryUser
 {
-    private readonly CargoFactoryApi _factoryApi = new CargoFactoryApi();
+    private readonly CargoFactoryService _factoryService = new CargoFactoryService();
 
     public LibraryUser()
     {
-        _factoryApi.AddBaseFactories();
-        _factoryApi.AddTransportationFactory("Truck",new TruckTransportationFactory());
+        _factoryService.AddBaseFactories();
+        _factoryService.AddTransportationFactory("Truck",new TruckTransportationFactory());
 
-        var truckTransportation = _factoryApi.Create("Truck");
+        var truckTransportation = _factoryService.Create("Truck");
         
     }
 }

@@ -3,7 +3,7 @@ using Factory.Cargo.TransportationFactory;
 
 namespace Factory.Cargo;
 
-public class CargoFactoryApi
+public class CargoFactoryService
 {
     private Dictionary<string, ITransportationFactory> _transportationFactories = new();
 
