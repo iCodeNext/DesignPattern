@@ -9,7 +9,6 @@ public class LibraryUser
 
     public LibraryUser()
     {
-        _factoryService.AddBaseFactories();
         _factoryService.AddTransportationFactory("Truck",new TruckTransportationFactory());
 
         var truckTransportation = _factoryService.Create("Truck");

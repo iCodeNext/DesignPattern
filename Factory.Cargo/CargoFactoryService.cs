@@ -7,7 +7,11 @@ public class CargoFactoryService
 {
     private Dictionary<string, ITransportationFactory> _transportationFactories = new();
 
-    public void AddBaseFactories()
+    public CargoFactoryService(bool addBaseFactories = true)
+    {
+        if(addBaseFactories) AddBaseFactories();
+    }
+    private void AddBaseFactories()
     {
         _transportationFactories.Add("Air",new AirTransportationFactory());
         _transportationFactories.Add("Train",new TrainTransportationFactory());
