@@ -22,19 +22,11 @@ public class CargoFactoryService
     public void AddTransportationFactory(string mode, ITransportationFactory transportationFactory)
         => _transportationFactories.Add(mode, transportationFactory);
 
-    public ITransportation Create(string mode, string? origin = null, string? destination = null)
+    public ITransportation Create(string mode, Dictionary<string,object> parameters)
     {
         if (_transportationFactories.TryGetValue(mode, out var transportationFactory) || transportationFactory is null)
-            throw new NotImplementedException($"The factory {mode} didn't define.");
-        try
-        {
-            return transportationFactory.Create(origin, destination);
-        }
-        catch
-        {
-            Console.WriteLine($"The factory {transportationFactory.GetType()} not accepting args.");
-        }
-
-        return transportationFactory.Create();
+            throw new NotImplementedException($"The factory {mode} didn't define."); 
+        
+        return transportationFactory.Create(parameters);
     }
 }

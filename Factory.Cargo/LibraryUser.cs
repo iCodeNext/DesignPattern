@@ -9,28 +9,41 @@ public class LibraryUser
 
     public LibraryUser()
     {
-        _factoryService.AddTransportationFactory("Truck",new TruckTransportationFactory());
+        _factoryService.AddTransportationFactory("Truck", new TruckTransportationFactory());
 
-        var truckTransportation = _factoryService.Create("Truck");
-        
+        var truckTransportation = _factoryService.Create("Truck", new Dictionary<string, object>
+        {
+            { "TruckType", "Trailer" },
+        });
     }
 }
 
-public class TruckTransportation : ITransportation
+public class TruckTransportation(string TruckType) : ITransportation
 {
     public void SendCargo()
     {
-        Console.WriteLine("Sending cargo through truck.");
+        Console.WriteLine($"Sending cargo through {TruckType} truck.");
     }
 }
 
 public class TruckTransportationFactory : ITransportationFactory
 {
     public ITransportation Create()
-        => new TruckTransportation();
+    {
+        throw new NotImplementedException("Use parameter overload instead");
+    }
+
+    public ITransportation Create(Dictionary<string, object> parameters)
+    {
+        if (parameters.TryGetValue("TruckType", out object? truckTypeObj) && truckTypeObj is string truckType)
+            return new TruckTransportation(truckType);
+        
+        throw new ArgumentNullException($"TruckType has not defined properly");
+
+    }
 
     public ITransportation Create(string origin, string destination)
     {
-        throw new NotImplementedException();
+        throw new NotImplementedException("Use parameter overload instead");
     }
 }
