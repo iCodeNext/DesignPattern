@@ -1,7 +1,7 @@
 ﻿
 namespace Examples.Jalilpour
 {
-    enum CargoType
+    public enum CargoType
     {
         Air,
         Ship,
@@ -24,7 +24,7 @@ namespace Examples.Jalilpour
             {
                 return new TrainDeliveryFactory().CreateDelivery();
             }
-            throw new InvalidArgumentException();
+            throw new InvalidOperationException();
         }
     }
 
@@ -64,6 +64,7 @@ namespace Examples.Jalilpour
             throw new NotImplementedException();
         }
     }
+
 
 
     public abstract class DeliveryFactory
@@ -108,18 +109,39 @@ namespace Examples.Jalilpour
         }
         private void init()
         {
-            throw NotImplementedException();
+            throw new NotImplementedException();
         }
     }
+
+
+
+    /// <summary>
+    /// Imagine it is a library and we make it as a package. so users or customers,
+    /// can't change your code, but they want to add a new behavior like Truck. so, how you can solve it.
+    /// </summary>
+    public class Truck : Delivery
+    {
+        public override void DeliverCargo()
+        {
+            Console.WriteLine("Delivering...");
+        }
+    }
+    public static class DeliveryFactoryExtentionMethod
+    {
+        public static void DeliverCargoByTruck(this Delivery truck)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    ///
 
 
     public class Program()
     {
         public void main()
         {
-            DeliveryService deliverFactory = new();
-            var instance = deliverFactory.Create(CargoType.Air);
-            instance.DeliverCargo();
+            Truck truck = new();
+            truck.DeliverCargoByTruck();
         }
     }
 }
