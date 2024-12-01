@@ -1,4 +1,4 @@
-﻿namespace Examples.E3___Cargo
+﻿namespace Examples.Cargo
 {
     public enum TransportType
     {

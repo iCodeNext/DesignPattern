@@ -1,6 +1,4 @@
-﻿using Examples.E3___Cargo;
-
-namespace Examples.Cargo;
+﻿namespace Examples.Cargo;
 public class CargoManager()
 {
     public ITransport GetTransport(TransportType type, string origin = "", string destination = "")
