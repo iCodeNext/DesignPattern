@@ -11,7 +11,7 @@ namespace Examples
                 case "AIR":
                     return new AIRTransferFactory().Send();
                 case "Ship":
-                    return new ShipTransferFactory().Send(origin, destination);
+                    return new ShipTransferFactory(origin, destination).Send();
                 case "Train":
                     return new TrainTransferFactory().Send();
                 default
