@@ -28,17 +28,13 @@
 
         public class AirTransport : Transport
         {
-            private static AirTransport _instance;
+            private static readonly Lazy<AirTransport> _instance = new(() => new AirTransport());
 
             private AirTransport() { }
 
             public static AirTransport GetInstance()
             {
-                if (_instance == null)
-                {
-                    _instance = new AirTransport();
-                }
-                return _instance;
+                return _instance.Value;
             }
 
             public override void Book()
