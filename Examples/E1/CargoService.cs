@@ -1,122 +1,119 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Examples.E1;
 
-namespace Examples.E1
+public class CargoService
 {
-    public class CargoService
+    public ICargo BookProduct(byte type, string? origin = null, string? destination = null)
     {
-        private  CargoFactory CargoFactory { get; set; }
-        private  string Origin =string.Empty;
-        private  string Destination = string.Empty;
-        public ICargo BookProduct(string type)
+        CargoFactory? factory = null;
+        if (type == (byte)CargoType.Air)
         {
+            factory = new AirFactory();
+        }
+        if (type == (byte)CargoType.Ship)
+        {
+            if (string.IsNullOrWhiteSpace(origin))
+                throw new ArgumentException("Origin should not be null or empty.", nameof(origin));
 
-            return CargoFactory.CreateCargoFactory(type,Origin,Destination);
+            if (string.IsNullOrWhiteSpace(destination))
+                throw new ArgumentException("Destination should not be null or empty.", nameof(destination));
+            factory = new ShipFactory(origin, destination);
 
         }
-    }
-
-    internal abstract class CargoFactory
-    {
-      public  ICargo CreateCargoFactory(string type,string origin,string destination)
+        if (type == (byte)CargoType.Air)
         {
-            CargoFactory factory =null ;
-            if (type == "Air")
-            {
-                factory=  new AirFactory();
-            }
-            if (type == "Ship")
-            {
-                factory = new ShipFactory(origin,destination);
-                
-            }
-            if (type == "Train")
-            {
-                factory = new TrainFactory();
+            factory = new TrainFactory();
 
-            }
-            if (factory is null)
-                 throw new Exception("type is wrong");
-
-            return factory.CreateCargo();
         }
-
-        public abstract ICargo CreateCargo();
-        
-    }
-
-    internal class TrainFactory : CargoFactory
-    {
-        public override ICargo CreateCargo()
-        {
-            var cargo = new Train();
-            TrainMethod();
-            return cargo;
-        }
-
-        private void TrainMethod()
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    internal class ShipFactory : CargoFactory
-    {
-        public ShipFactory(string origin, string destination)
-        {
-            Origin = origin;
-            Destination = destination;
-        }
-
-        public string Origin { get; set; }
-        public string Destination { get; set; }
-        public override ICargo CreateCargo()
-        {
-           return new Ship(Origin, Destination);
-        }
-    }
-
-    internal class AirFactory : CargoFactory
-    {
-        private static Air Air { get; set; }
-        public override ICargo CreateCargo()
-        {
-            if (Air is null) 
-            {
-            Air = new Air();
-               
-            }
-            return Air;
-        }
-    }
-
-    internal class Train : ICargo
-    {
-
-    }
-
-    internal class Ship : ICargo
-    {
-        public Ship(string origin, string destination)
-        {
-            Origin = origin;
-            Destination = destination;
-        }
-
-        public string Origin { get; }
-        public string Destination { get; }
-    }
-
-    internal class Air : ICargo
-    {
-
-    }
-
-    public interface ICargo
-    {
-
+        if (factory is null)
+            throw new Exception("cargotype is wrong please enter a new type");
+        return factory.Create(origin, destination);
     }
 }
+
+public abstract class CargoFactory
+{
+    public abstract ICargo Create(string? origin = null, string? destination = null);
+}
+
+public class TrainFactory : CargoFactory
+{
+    public override ICargo Create(string? origin = null, string? destination = null)
+    {
+        var cargo = new Train();
+        TrainMethod();
+        return cargo;
+    }
+
+    private void TrainMethod() => Console.WriteLine("train is new");
+}
+
+public class ShipFactory : CargoFactory
+{
+    public ShipFactory(string origin, string destination)
+    {
+        Origin = origin;
+        Destination = destination;
+    }
+
+    public string Origin { get; set; }
+    public string Destination { get; set; }
+    public override ICargo Create(string? origin, string? destination)
+    {
+        return new Ship(origin, destination);
+    }
+}
+
+public class AirFactory : CargoFactory
+{
+    private static readonly Lazy<Air> _air = new Lazy<Air>(() => new Air());
+
+    public override ICargo Create(string? origin, string? destination)
+    {
+        return _air.Value;
+    }
+}
+
+public class Train : ICargo
+{
+    public decimal SetPayment()
+    {
+        return 500;
+    }
+}
+
+public class Ship : ICargo
+{
+    public Ship(string origin, string destination)
+    {
+        Origin = origin;
+        Destination = destination;
+    }
+
+    public string Origin { get; set; }
+    public string Destination { get; set; }
+    public decimal SetPayment()
+    {
+        return 2000;
+    }
+}
+
+public class Air : ICargo
+{
+    public decimal SetPayment() 
+    {
+        return 1000;
+    }
+}
+
+public interface ICargo
+{
+    public decimal SetPayment();
+}
+public enum CargoType
+{
+    NotSet = 0,
+    Air = 1,
+    Ship = 2,
+    Train = 3,
+}
+
