@@ -9,28 +9,34 @@ If the user selects an unsupported payment method, the system should default to 
 ## Input:
 
 Payment Method: CreditCard
+<br>
 Amount: 100
 
 ### Output:
 Applying 2% fee for credit card payment.
+<br>
 Processing credit card payment of $102.00
 
 
 ## Input:
 
 Payment Method: CryptoCurrency
+<br>
 Amount: 200
 
 ### Output:
 No adjustment for the selected payment method.
+<br>
 Processing cryptocurrency payment of $200.00 via third-party library
 
 
 ## Input:
 
 Payment Method: Unsupported
+<br>
 Amount: 150
 
 ### Output:
 No adjustment for the selected payment method.
+<br>
 Payment method not supported. Unable to process $150.00.
