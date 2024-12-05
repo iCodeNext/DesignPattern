@@ -23,16 +23,16 @@ public class SlackNotification
 } 
 #endregion
 
-public class NotificationService()
+public class NotificationService2()
 {
-    public ... Get(string type)
+    public object Get(string type)
     {
         if (type == "Email")
-            return new ...();
+            return new();
         else if (type == "SMS")
-            return new ...();
+            return new();
         else if (type == "Slack")
-            return new ...();
+            return new();
 
         else
             throw new ArgumentException("Invalid notification type.");

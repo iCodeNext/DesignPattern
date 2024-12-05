@@ -1,11 +1,11 @@
 public class NotificationService()
 {
-    public ... Get(string type)
+    public object Get(string type)
     {
         if (type == "Email")
-            return new ...();
+            return new();
         else if (type == "SMS")
-            return new ...();
+            return new();
         //else if (type == "Push")
         //	return new ...();
 

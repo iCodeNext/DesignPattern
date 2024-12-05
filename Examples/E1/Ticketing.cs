@@ -1,13 +1,13 @@
 public class TicketService
 {
-    public ... Get(string ticketType)
+    public object Get(string ticketType)
     {
         if (ticketType == "Movie")
-            return new ...();
+            return new();
         else if (ticketType == "Concert")
-            return new ...();
+            return new();
         else if (ticketType == "Flight")
-            return new ...();
+            return new();
         else
             throw new ArgumentException("Invalid ticket type.");
     }
