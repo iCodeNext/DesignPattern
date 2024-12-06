@@ -20,7 +20,7 @@ namespace Payment.Infrastructure
         {
             var payment = _payments.Keys.Contains(paymentId) ? _payments[paymentId] : null;
             if (payment == null)
-                return null;
+                return new NullPaymentProcessor();
             return (IPaymentProcessor)Activator.CreateInstance(payment);
         }
     }
