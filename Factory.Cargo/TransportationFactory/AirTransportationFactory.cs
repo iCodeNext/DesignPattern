@@ -12,4 +12,6 @@ public class AirTransportationFactory : ITransportationFactory
 
     public ITransportation Create(string origin, string destination) =>
         throw new NotImplementedException("Air transportation should be initialized without any args");
+
+    public ITransportation Create(Dictionary<string, object> _) => Create();
 }

@@ -1,5 +1,6 @@
 ﻿using Factory.Cargo.Factory;
 using Factory.Cargo.Transportation;
+using Factory.Cargo.TransportationFactory;
 
 namespace Factory.Cargo;
 
@@ -19,9 +20,9 @@ public class CargoService
     {
         return transportationMode switch
         {
-            TransportationMode.Air => new AirTransportation(),
-            TransportationMode.Ship => new ShipTransportation(origin, destination),
-            TransportationMode.Train => new TrainTransportation(),
+            TransportationMode.Air => new AirTransportationFactory().Create(),
+            TransportationMode.Ship => new ShipTransportationFactory().Create(origin,destination),
+            TransportationMode.Train => new TrainTransportationFactory().Create(),
             _ => throw new NotImplementedException("Requested transport mode is not implemented.")
         };
     }
