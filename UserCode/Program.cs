@@ -70,6 +70,8 @@
 //    }
 //}
 
+
+
 //#endregion
 
 //#region 1.2
@@ -530,109 +532,271 @@
 //#endregion
 
 
-#region 1.8
+//#region 1.8
 
-using ExternalClassLibrary;
+//using CryptoCurrencyExternalLibrary;
+//using ExternalClassLibrary;
+//using System.ComponentModel;
+
+//public class Program
+//{
+//    public static void Main()
+//    {
+//        var type = Console.ReadLine();
+//        ITransport transport = TransportService.Create(type);
+//        transport.Send();
+//    }
+//}
+
+//public class TransportService
+//{
+//    public static ITransport Create(string type)
+//    {
+//        switch (type)
+//        {
+//            case "Air":
+//                {
+//                    var factory = new AirFactory();
+//                    return factory.CreateInstance();
+//                }
+//            case "Train":
+//                {
+//                    var factory = new TrainFactory();
+//                    return factory.CreateInstance();
+//                }
+
+//            case "Truck":
+//                {
+//                    return new TruckAdapter();
+//                }
+//            default:
+//                throw new NotImplementedException();
+//        }
+//    }
+//}
+
+//public interface ITransport
+//{
+//    void Send();
+//}
+
+//public class Air : ITransport
+//{
+//    public void Send()
+//    {
+//        Console.WriteLine("Send package by air ...");
+//    }
+//}
+
+//public class Train : ITransport
+//{
+//    public void Send()
+//    {
+//        Console.WriteLine("Send package by Train ...");
+//    }
+//}
+
+//public class TruckAdapter : ITransport
+//{
+//    private readonly Truck _truck;
+
+//    public TruckAdapter()
+//    {
+//        _truck = new Truck(5, "THR");
+//    }
+
+//    public void Send()
+//    {
+//        // Delegate the call to the Truck class's Deliver method
+//        // string -> xml nodes
+//        // <xml>
+//        // <node>............</node>
+//        //</xml>
+//        _truck.Deliver();
+//    }
+//}
+
+//public interface ITransportFactory
+//{
+//    ITransport CreateInstance();
+//}
+
+//public class AirFactory : ITransportFactory
+//{
+//    public ITransport CreateInstance()
+//    {
+//        //manage instance
+//        return new Air();
+//    }
+//}
+
+//public class TrainFactory : ITransportFactory
+//{
+//    public ITransport CreateInstance()
+//    {
+//        //manage instance
+//        return new Train();
+//    }
+//}
+
+//#endregion
+#region 1.9
+
+using CryptoCurrencyExternalLibrary;
+
 
 public class Program
 {
     public static void Main()
     {
         var type = Console.ReadLine();
-        ITransport transport = TransportService.Create(type);
-        transport.Send();
+        Console.WriteLine("Please enter the amount:");
+
+        string input = Console.ReadLine();
+        if (decimal.TryParse(input, out decimal amount))
+        {
+            Console.WriteLine($"The entered amount is: {amount}"); // You can now use the 'amount' variable as needed
+
+        }
+        else
+        {
+            Console.WriteLine("Invalid input, please enter a valid decimal number.");
+        }
+
+
+        IPayment payment = PaymentService.Create(type);
+        payment.ProcessPayment(amount);
+        amount = payment.AdjustAmount(amount);
     }
 }
 
-public class TransportService
+public class PaymentService
 {
-    public static ITransport Create(string type)
+    public static IPayment Create(string type)
     {
         switch (type)
         {
-            case "Air":
+            case "CreditCard":
                 {
-                    var factory = new AirFactory();
+                    var factory = new CreditCardFactory();
                     return factory.CreateInstance();
                 }
-            case "Train":
+            case "PayPal":
                 {
-                    var factory = new TrainFactory();
+                    var factory = new PayPalFactory();
                     return factory.CreateInstance();
                 }
 
-            case "Truck":
+            case "CryptoCurrency":
                 {
-                    return new TruckAdapter();
+                    return new CryptoCurrencyAdapter();
                 }
             default:
-                throw new NotImplementedException();
+                {
+                    var factory = new NullPaymentFactory();
+                    return factory.CreateInstance();
+                }
         }
     }
 }
 
-public interface ITransport
+public interface IPayment
 {
-    void Send();
+    void ProcessPayment(decimal amount);
+    decimal AdjustAmount(decimal amount);
+
+}
+public class CreditCard : IPayment
+{
+    private const decimal FeeRate = 0.02m;
+    public void ProcessPayment(decimal amount)
+    {
+
+    }
+    public decimal AdjustAmount(decimal amount)
+    {
+        return amount + (amount * FeeRate);
+    }
+
 }
 
-public class Air : ITransport
+public class PayPal : IPayment
 {
-    public void Send()
+    private const decimal DiscountRate = 0.03m;
+    public void ProcessPayment(decimal amount)
     {
-        Console.WriteLine("Send package by air ...");
+        Console.WriteLine();
+    }
+    public decimal AdjustAmount(decimal amount)
+    {
+        return amount - (amount * DiscountRate);
     }
 }
 
-public class Train : ITransport
+public class CryptoCurrencyAdapter : IPayment
 {
-    public void Send()
+    private readonly CryptoCurrency _cryptoCurrency;
+
+    public CryptoCurrencyAdapter()
     {
-        Console.WriteLine("Send package by Train ...");
+        _cryptoCurrency = new CryptoCurrency();
+    }
+
+    public decimal AdjustAmount(decimal amount)
+    {
+        return _cryptoCurrency.ExternalProcessPayment(amount);
+    }
+
+    public void ProcessPayment(decimal amount)
+    {
+        throw new NotImplementedException();
     }
 }
 
-public class TruckAdapter : ITransport
+public interface IPaymentFactory
 {
-    private readonly Truck _truck;
-
-    public TruckAdapter()
-    {
-        _truck = new Truck(5,"THR");
-    }
-
-    public void Send()
-    {
-        // Delegate the call to the Truck class's Deliver method
-        // string -> xml nodes
-        // <xml>
-        // <node>............</node>
-        //</xml>
-        _truck.Deliver();
-    }
+    IPayment CreateInstance();
 }
 
-public interface ITransportFactory
+public class CreditCardFactory : IPaymentFactory
 {
-    ITransport CreateInstance();
-}
-
-public class AirFactory : ITransportFactory
-{
-    public ITransport CreateInstance()
+    public IPayment CreateInstance()
     {
         //manage instance
-        return new Air();
+        return new CreditCard();
     }
 }
 
-public class TrainFactory : ITransportFactory
+public class PayPalFactory : IPaymentFactory
 {
-    public ITransport CreateInstance()
+    public IPayment CreateInstance()
     {
         //manage instance
-        return new Train();
+        return new PayPal();
     }
 }
+
+public class NullPayment : IPayment
+{
+    public decimal AdjustAmount(decimal amount)
+    {
+        return amount;
+    }
+
+    public void ProcessPayment(decimal amount)
+    {
+        Console.WriteLine($"Payment method not supported. Unable to process ${amount:F2}.");
+    }
+
+}
+public class NullPaymentFactory : IPaymentFactory
+{
+    public IPayment CreateInstance()
+    {
+        //manage instance
+        return new NullPayment();
+    }
+}
+
 
 #endregion
